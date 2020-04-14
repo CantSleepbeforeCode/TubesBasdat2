@@ -486,7 +486,7 @@
                                                 <td>'.$row['waktu_pelaksanaan'].'</td>
                                                 <td>'.$row['materi_td'].'</td>
                                                 <td><a href="crud/approve-td.php?id='.$row['id_absensi'].'" class="btn btn-primary">Setujui</a></td>
-                                                <td><a href="" class="btn btn-danger">Tolak</a></td>';
+                                                <td><a href="crud/reject-td.php?id='.$row['id_absensi'].'" class="btn btn-danger">Tolak</a></td>';
 
                                             } 
                                             ?>
