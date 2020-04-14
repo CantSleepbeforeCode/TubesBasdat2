@@ -16,6 +16,11 @@
 <body>
     <?php 
         require __DIR__ . '/../conf.php';
+        session_start();
+        $id = $_SESSION["id"];
+        $query = mysqli_query($connect, "SELECT * FROM mentor WHERE id_mentor = '$id'");
+        $fetchUser = mysqli_fetch_assoc($query);
+
     ?>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
@@ -56,11 +61,11 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/profil.jpg" alt="">
+                                            <img width="42" class="rounded-circle" src="../assets/images/profil.jpg" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <a href="dropdownitem" class="dropdown-item" tabindex="0"><i class="metismenu-icon pe-7s-door-lock" style="margin-right: 0.5rem; font-size: 2rem;"></i>Keluar</a>
+                                            <a href="../logout.php" class="dropdown-item" tabindex="0"><i class="metismenu-icon pe-7s-door-lock" style="margin-right: 0.5rem; font-size: 2rem;"></i>Keluar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -428,7 +433,7 @@
                                     <div class="page-title-icon">
                                         <i class="pe-7s-user icon-gradient bg-mean-fruit"></i>
                                     </div>
-                                    <div>Selamat Datang, 
+                                    <div>Selamat Datang, <?php echo $fetchUser['nama_mentor'] ?> 
                                         <div class="page-title-subheading">Silahkan lihat data Dilopad
                                         </div>
                                     </div>

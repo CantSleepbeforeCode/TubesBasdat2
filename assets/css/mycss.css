@@ -97,7 +97,8 @@
 	 max-width: 600px;
 	 margin: 0 auto;
 	 padding: 80px 0;
-	 height: 100vh;
+     height: 100vh;
+     margin-top: 6rem;
 	 text-align: center;
 }
  .wrapper .container h1 {
