@@ -12,6 +12,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <link href="../assets/css/main.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
 </head>
 <body>
     <?php 
@@ -457,11 +458,11 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Nama</th>
+                                                <th>Nama Peserta</th>
                                                 <th>Tempat</th>
                                                 <th>Waktu</th>
+                                                <th>Nama Mentor</th>
                                                 <th>Materi</th>
-                                                <th>Aksi</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -472,15 +473,15 @@
                                                 <td>'.$row['nama_peserta'].'</td>
                                                 <td>'.$row['tempat_pelaksanaan'].'</td>
                                                 <td>'.$row['waktu_pelaksanaan'].'</td>
-                                                <td>'.$row['materi_td'].'</td>
-                                                <td><a href="" class="btn btn-primary">Cetak</a></td>';
+                                                <td>'.$row['Name_exp_5'].'</td>
+                                                <td>'.$row['materi_td'].'</td>';
 
                                             } 
                                             ?>
                                             
                                             </tbody>
                                         </table>
-                                        <a type="button" class="btn btn-primary" data-toggle="collapse" href="#'.$idCollpase.'" role="button" aria-expanded="false" aria-controls="'.$idCollpase.'" style="margin-top:2rem">Cetak Semua</a>
+                                        <a class="btn btn-primary" style="margin-top:2rem; color: white;" onclick="printJS('td', 'html')">Cetak Semua</a>
                                     </div>
                                 </div>
                             </div>
@@ -497,6 +498,7 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
