@@ -16,11 +16,15 @@
 <body>
     <?php 
         require __DIR__ . '/../conf.php';
+        session_start();
+        $id = $_SESSION["id"];
+        $query = mysqli_query($connect, "SELECT * FROM mentor WHERE id_mentor = '$id'");
+        $fetchUser = mysqli_fetch_assoc($query);
     ?>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-            <img src="assets/images/logo.png" alt="" width="100">
+            <img src="../assets/images/logo.png" alt="" width="100">
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -356,7 +360,7 @@
         <div class="app-main">
                 <div class="app-sidebar sidebar-shadow">
                     <div class="app-header__logo">
-                    <img src="assets/images/logo.png" alt="" width="100">
+                    <img src="../assets/images/logo.png" alt="" width="100">
                         <div class="header__pane ml-auto">
                             <div>
                                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -428,7 +432,7 @@
                                     <div class="page-title-icon">
                                         <i class="pe-7s-user icon-gradient bg-mean-fruit"></i>
                                     </div>
-                                    <div>Selamat Datang, 
+                                    <div>Selamat Datang, <?php echo $fetchUser['nama_mentor'] ?> 
                                         <div class="page-title-subheading">Silahkan lihat data Dilopad
                                         </div>
                                     </div>
@@ -440,7 +444,7 @@
                         <div class="row" style="margin-bottom:2rem">
                             <?php
                                 $urut = 1;
-                                $data = mysqli_query($connect,"SELECT * FROM view_absen_td WHERE isVerified = 'verified' AND id_mentorr='M0005'");
+                                $data = mysqli_query($connect,"SELECT * FROM view_absen_td WHERE isVerified = 'verified' AND id_mentorr='$id'");
                             ?>
                             <div class="col-md-12 col-lg-12">
                                 <div class="card">

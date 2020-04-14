@@ -16,11 +16,27 @@
 <body>
     <?php 
         require __DIR__ . '/../conf.php';
+        session_start();
+        $id = $_SESSION["id"];
+        $query = mysqli_query($connect, "SELECT * FROM mentor WHERE id_mentor = '$id'");
+        $fetchUser = mysqli_fetch_assoc($query);
+
+        if(isset($_GET['pesan'])){
+            if($_GET['pesan'] == "verified"){
+                echo '<script type="text/javascript"> 
+                        alert("Data berhasil diverifikasi. Terimakasih.");
+                        </script>';
+            }else if($_GET['pesan'] == "denied"){
+                echo '<script type="text/javascript"> 
+                        alert("Data berhasil Ditolak");
+                        </script>';
+            }
+        }
     ?>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-            <img src="assets/images/logo.png" alt="" width="100">
+            <img src="../assets/images/logo.png" alt="" width="100">
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -356,7 +372,7 @@
         <div class="app-main">
                 <div class="app-sidebar sidebar-shadow">
                     <div class="app-header__logo">
-                    <img src="assets/images/logo.png" alt="" width="100">
+                    <img src="../assets/images/logo.png" alt="" width="100">
                         <div class="header__pane ml-auto">
                             <div>
                                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -428,7 +444,7 @@
                                     <div class="page-title-icon">
                                         <i class="pe-7s-user icon-gradient bg-mean-fruit"></i>
                                     </div>
-                                    <div>Selamat Datang, 
+                                    <div>Selamat Datang, <?php echo $fetchUser['nama_mentor'] ?> 
                                         <div class="page-title-subheading">Silahkan lihat data Dilopad
                                         </div>
                                     </div>
@@ -440,7 +456,7 @@
                         <div class="row" style="margin-bottom:2rem">
                             <?php
                                 $urut = 1;
-                                $data = mysqli_query($connect,"SELECT * FROM view_absen_mentoring WHERE id_mentorr = 'M0002' AND isVerified = 'non-verified'");
+                                $data = mysqli_query($connect,"SELECT * FROM view_absen_mentoring WHERE id_mentorr = '$id' AND isVerified = 'non-verified'");
                             ?>
                             <div class="col-md-12 col-lg-12">
                                 <div class="card">
@@ -470,11 +486,11 @@
                                                 <td>'.$row['waktu_pelaksanaan'].'</td>
                                                 <td>'.$row['materi_mentoring'].'</td>
                                                 <td style="text-center"><a class="btn btn-primary" data-toggle="collapse" href="#'.$idCollpase.'" role="button" aria-expanded="false" aria-controls="'.$idCollpase.'">Tim</a></td>
-                                                <td style="text-center"><a class="btn btn-success" data-toggle="collapse" href="#'.$idCollpase.'" role="button" aria-expanded="false" aria-controls="'.$idCollpase.'">Setujui</a></td>
+                                                <td style="text-center"><a class="btn btn-success" href="crud/approve-mentoring.php?id='.$row['id_absensi'].'" role="button">Setujui</a></td>
                                                 <td><a class="btn btn-danger" data-toggle="collapse" href="#'.$idCollpase.'" role="button" aria-expanded="false" aria-controls="'.$idCollpase.'">Tolak</a></td>
 
                                                 <tr>
-                                                <td colspan="7">
+                                                <td colspan="8">
                                                 <ul class="collapse list-group" id="'.$idCollpase.'">
                                                     <li class="list-group-item list-group-item-success">Ketua Tim: '.$row['nama_1'].'</li>
                                                     <li class="list-group-item">'.$row['nama_2'].'</li>

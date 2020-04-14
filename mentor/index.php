@@ -25,7 +25,7 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-            <img src="assets/images/logo.png" alt="" width="100">
+            <img src="../assets/images/logo.png" alt="" width="100">
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -361,7 +361,7 @@
         <div class="app-main">
                 <div class="app-sidebar sidebar-shadow">
                     <div class="app-header__logo">
-                    <img src="assets/images/logo.png" alt="" width="100">
+                    <img src="../assets/images/logo.png" alt="" width="100">
                         <div class="header__pane ml-auto">
                             <div>
                                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -573,7 +573,7 @@
                         <div class="row" style="margin-bottom:2rem">
                             <?php
                                 $urut = 1;
-                                $data = mysqli_query($connect,"SELECT * FROM view_absen_td WHERE id_mentorr = 'M0007' AND isVerified = 'verified'");
+                                $data = mysqli_query($connect,"SELECT * FROM view_absen_td WHERE id_mentorr = '$id' AND isVerified = 'verified'");
                             ?>
                             <div class="col-md-6 col-lg-6">
                                 <div class="card">
@@ -608,7 +608,7 @@
                             </div>
                             <?php
                                 $urut = 1;
-                                $data = mysqli_query($connect,"SELECT * FROM view_absen_mentoring WHERE id_mentorr = 'M0006' AND isVerified = 'verified'");
+                                $data = mysqli_query($connect,"SELECT * FROM view_absen_mentoring WHERE id_mentorr = '$id' AND isVerified = 'verified'");
                             ?>
                             <div class="col-md-6 col-lg-6">
                                 <div class="card">
