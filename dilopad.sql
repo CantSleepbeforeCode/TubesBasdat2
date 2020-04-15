@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 06:54 AM
+-- Generation Time: Apr 15, 2020 at 10:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -51,7 +51,8 @@ INSERT INTO `absensi` (`id_absensi`, `id_tim`, `id_peserta_I`, `id_peserta_II`, 
 ('A0004', 'T0004', 'P0009', 'P0014', 'P0013', 'TD004', 'TM004', 'Ruang 1A DiloBPP', '2019-12-04', 'verified'),
 ('A0005', 'T0005', 'P0011', 'P0016', 'P0005', 'TD005', 'TM005', 'Ruang 2A DiloBPP', '2019-12-06', 'verified'),
 ('A0006', 'T0006', 'P0015', 'P0018', 'P0020', 'TD006', 'TM006', 'Ruang 3A DiloBPP', '2019-12-05', 'verified'),
-('A0007', 'T0007', 'P0017', 'P0007', 'P0021', 'TD007', 'TM007', 'Ruang 1A DiloBPP', '2019-12-01', 'verified');
+('A0007', 'T0007', 'P0017', 'P0007', 'P0021', 'TD007', 'TM007', 'Ruang 1A DiloBPP', '2019-12-01', 'verified'),
+('A0008', 'T0001', 'P0001', 'P0002', NULL, NULL, 'TM003', 'Dilo', '2020-04-28', 'non-verified');
 
 -- --------------------------------------------------------
 
@@ -270,11 +271,38 @@ CREATE TABLE `view_absen_td` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_detail_mentoring`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_detail_mentoring` (
+`id_mentor` varchar(5)
+,`id_mentoring` varchar(5)
+,`nama_mentor` varchar(70)
+,`materi_mentoring` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_detail_td`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_detail_td` (
+`id_mentor` varchar(5)
+,`id_td` varchar(5)
+,`nama_mentor` varchar(70)
+,`materi_td` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_team`
 -- (See below for the actual view)
 --
 CREATE TABLE `view_team` (
-`nama_tim` varchar(70)
+`id_tim` varchar(5)
+,`nama_tim` varchar(70)
 ,`pic_name` varchar(70)
 ,`desc_tim` text
 ,`ide_tim` text
@@ -282,6 +310,9 @@ CREATE TABLE `view_team` (
 ,`nama_1` varchar(70)
 ,`nama_2` varchar(70)
 ,`nama_3` varchar(70)
+,`id_peserta_I` varchar(5)
+,`id_peserta_II` varchar(5)
+,`id_peserta_III` varchar(5)
 );
 
 -- --------------------------------------------------------
@@ -305,11 +336,29 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_detail_mentoring`
+--
+DROP TABLE IF EXISTS `view_detail_mentoring`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_detail_mentoring`  AS  select `mentor`.`id_mentor` AS `id_mentor`,`mentoring`.`id_mentoring` AS `id_mentoring`,`mentor`.`nama_mentor` AS `nama_mentor`,`mentoring`.`materi_mentoring` AS `materi_mentoring` from (`mentor` join `mentoring`) where `mentor`.`id_mentor` = `mentoring`.`id_mentor` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_detail_td`
+--
+DROP TABLE IF EXISTS `view_detail_td`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_detail_td`  AS  select `mentor`.`id_mentor` AS `id_mentor`,`talent_development`.`id_td` AS `id_td`,`mentor`.`nama_mentor` AS `nama_mentor`,`talent_development`.`materi_td` AS `materi_td` from (`mentor` join `talent_development`) where `mentor`.`id_mentor` = `talent_development`.`id_mentor` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_team`
 --
 DROP TABLE IF EXISTS `view_team`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_team`  AS  select `tim`.`nama_tim` AS `nama_tim`,`tim`.`pic_name` AS `pic_name`,`tim`.`desc_tim` AS `desc_tim`,`tim`.`ide_tim` AS `ide_tim`,`tim`.`lokasi_tim` AS `lokasi_tim`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_I`) AS `nama_1`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_II`) AS `nama_2`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_III`) AS `nama_3` from `tim` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_team`  AS  select `tim`.`id_tim` AS `id_tim`,`tim`.`nama_tim` AS `nama_tim`,`tim`.`pic_name` AS `pic_name`,`tim`.`desc_tim` AS `desc_tim`,`tim`.`ide_tim` AS `ide_tim`,`tim`.`lokasi_tim` AS `lokasi_tim`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_I`) AS `nama_1`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_II`) AS `nama_2`,(select `peserta`.`nama_peserta` from `peserta` where `peserta`.`id_peserta` = `tim`.`id_peserta_III`) AS `nama_3`,`tim`.`id_peserta_I` AS `id_peserta_I`,`tim`.`id_peserta_II` AS `id_peserta_II`,`tim`.`id_peserta_III` AS `id_peserta_III` from `tim` ;
 
 --
 -- Indexes for dumped tables

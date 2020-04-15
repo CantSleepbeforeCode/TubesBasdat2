@@ -10,12 +10,18 @@
     $cekPeserta = mysqli_num_rows($dataPeserta);
 
     if($cekPeserta > 0) {
-        $dataFinal = mysqli_query($connect, "SELECT * FROM user WHERE id = ".'$fetchPeserta[0]'." AND pass = ".'$password');
-        $fetchFinal = mysqli_fetch_row($dataFinal);
+        $dataFinal = mysqli_query($connect, "SELECT * FROM user WHERE id = '$fetchPeserta[0]' AND pass = '$password'");
+        $fetchFinal = mysqli_fetch_assoc($dataFinal);
+        $cekfinal = mysqli_num_rows($dataFinal);
 
-        $_SESSION['username'] = $fetchFinal['id'];
-        $_SESSION['status'] = $fetchFinal['hak_akses'];
-        header("location:peserta/index.php");
+        if($cekfinal > 0) {
+            $_SESSION['id'] = $fetchFinal['id'];
+            $_SESSION['status'] = $fetchFinal['hak_akses'];
+            header("location:peserta/absen-td.php");
+        } else {
+            header("location:index.php?pesan=gagal");
+        }
+
     } else {
         $dataMentor = mysqli_query($connect, "SELECT id_mentor FROM mentor WHERE email_mentor = '$email'");
         $fetchMentor = mysqli_fetch_row($dataMentor);
