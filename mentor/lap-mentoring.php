@@ -65,7 +65,7 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <a href="dropdownitem" class="dropdown-item" tabindex="0"><i class="metismenu-icon pe-7s-door-lock" style="margin-right: 0.5rem; font-size: 2rem;"></i>Keluar</a>
+                                        <a href="../logout.php" class="dropdown-item" tabindex="0"><i class="metismenu-icon pe-7s-door-lock" style="margin-right: 0.5rem; font-size: 2rem;"></i>Keluar</a>
                                         </div>
                                     </div>
                                 </div>
