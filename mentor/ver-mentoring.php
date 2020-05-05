@@ -487,7 +487,7 @@
                                                 <td>'.$row['materi_mentoring'].'</td>
                                                 <td style="text-center"><a class="btn btn-primary" data-toggle="collapse" href="#'.$idCollpase.'" role="button" aria-expanded="false" aria-controls="'.$idCollpase.'">Tim</a></td>
                                                 <td style="text-center"><a class="btn btn-success" href="crud/approve-mentoring.php?id='.$row['id_absensi'].'">Setujui</a></td>
-                                                <td><a class="btn btn-success" href="crud/reject-mentoring.php?id='.$row['id_absensi'].'">Setujui</a></td>
+                                                <td><a class="btn btn-danger" href="crud/reject-mentoring.php?id='.$row['id_absensi'].'">Tolak</a></td>
 
                                                 <tr>
                                                 <td colspan="8">
